@@ -6,7 +6,7 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: AppPallet.background,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: AppPallet.primarySurface,
       secondary: AppPallet.secondarySurface,
       surface: AppPallet.primarySurface,

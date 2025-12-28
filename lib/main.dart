@@ -1,9 +1,10 @@
 import 'package:flt_omi/core/theme/app_theme.dart';
-import 'package:flt_omi/splash_screen.dart';
+import 'package:flt_omi/features/auth/presentation/screen/auth_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'OMI',
       theme: AppTheme.lightTheme,
       // darkTheme: ThemeData.dark(),
-      home: SplashScreen(),
+      home: const AuthScreen(),
     );
   }
 }
