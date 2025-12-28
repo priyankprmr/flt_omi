@@ -5,11 +5,20 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(children: [
-        
-      ],),
+    return Form(
+      child: Column(
+        children: [
+          TextFormField(decoration: const InputDecoration(hintText: 'Email')),
+          const SizedBox(height: 14.0),
+          TextFormField(
+            decoration: const InputDecoration(hintText: 'Password'),
+          ),
+          const SizedBox(height: 14.0),
+          TextFormField(
+            decoration: const InputDecoration(hintText: 'Confirm Password'),
+          ),
+        ],
+      ),
     );
   }
 }

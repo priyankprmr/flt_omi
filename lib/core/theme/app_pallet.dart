@@ -1,4 +1,4 @@
-import 'dart:ui' show Color;
+import 'package:flutter/material.dart' show Color, Colors;
 
 class AppPallet {
   AppPallet._();
@@ -7,4 +7,7 @@ class AppPallet {
   static const primarySurface = Color(0xFFB6F500);
   static const secondarySurface = Color(0xFFA4DD00);
   static const accentSurface = Color(0xFF98CD00);
+
+  static const black = Colors.black;
+  static const white = Colors.white;
 }
