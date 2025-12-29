@@ -46,3 +46,6 @@ app.*.map.json
 
 # Misc
 folder_structure.md
+
+# FVM Version Cache
+.fvm/
