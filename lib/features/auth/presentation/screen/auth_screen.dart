@@ -6,6 +6,7 @@ import 'package:flt_omi/features/auth/presentation/widgets/signin_form.dart';
 import 'package:flt_omi/features/auth/presentation/widgets/signup_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 
 class AuthScreen extends ConsumerWidget {
@@ -39,11 +40,27 @@ class AuthScreen extends ConsumerWidget {
             const Spacer(),
             switch (formType) {
               AuthFormType.signin => ElevatedButton(
-                  onPressed: () {}, child: const Text(AppTexts.signIn)),
+                  onPressed: () {},
+                  child: const Text(AppTexts.signIn),
+                ),
               AuthFormType.signup => ElevatedButton(
-                  onPressed: () {}, child: const Text(AppTexts.signUp)),
+                  onPressed: () {},
+                  child: const Text(AppTexts.signUp),
+                ),
             },
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 10.0),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(FontAwesomeIcons.google),
+                  SizedBox(width: 4.0),
+                  Text(AppTexts.google)
+                ],
+              ),
+            ),
+            const SizedBox(height: 10.0),
             // Rich text to toggle forms
             Text.rich(
               switch (formType) {
