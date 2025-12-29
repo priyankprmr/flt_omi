@@ -12,6 +12,7 @@ class AuthScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Sign Up'), centerTitle: true),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             const SignupForm().padding(
               const EdgeInsetsGeometry.symmetric(vertical: 20.0),
