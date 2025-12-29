@@ -14,7 +14,7 @@ class AuthScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Form type from auth form type provider
     final formType = ref.watch(authFormProvider);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: switch (formType) {
@@ -78,16 +78,13 @@ class AuthScreen extends ConsumerWidget {
         WidgetSpan(
           alignment: PlaceholderAlignment.baseline,
           baseline: TextBaseline.alphabetic,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onTap,
-              child: Text(
-                suffixText,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      decoration: TextDecoration.underline,
-                    ),
-              ),
+          child: GestureDetector(
+            onTap: onTap,
+            child: Text(
+              suffixText,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    decoration: TextDecoration.underline,
+                  ),
             ),
           ),
         )
