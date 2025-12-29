@@ -6,6 +6,7 @@ import 'package:flt_omi/features/auth/presentation/widgets/signin_form.dart';
 import 'package:flt_omi/features/auth/presentation/widgets/signup_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 class AuthScreen extends ConsumerWidget {
   const AuthScreen({super.key});
@@ -25,8 +26,9 @@ class AuthScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            const SizedBox(height: 20.0),
+            Lottie.asset('assets/lottie/welcome_text_animation.json'),
             const SizedBox(height: 20.0),
             // Sign In and Sign Up forms
             switch (formType) {
@@ -34,7 +36,7 @@ class AuthScreen extends ConsumerWidget {
               AuthFormType.signup => const SignupForm(),
             },
             const SizedBox(height: 20.0),
-            // Buttons
+            const Spacer(),
             switch (formType) {
               AuthFormType.signin => ElevatedButton(
                   onPressed: () {}, child: const Text(AppTexts.signIn)),
