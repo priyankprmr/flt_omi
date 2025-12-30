@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "467325036364",
+    "project_id": "flt-omi",
+    "storage_bucket": "flt-omi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467325036364:android:db91efc0093360e22411e9",
+        "android_client_info": {
+          "package_name": "com.example.flt_omi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi_xADRJnfY4I8b-VvIl3DrgqkseGv71o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
