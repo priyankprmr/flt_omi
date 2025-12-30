@@ -1,9 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flt_omi/core/theme/app_theme.dart';
 import 'package:flt_omi/features/auth/presentation/screen/auth_screen.dart';
+import 'package:flt_omi/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
