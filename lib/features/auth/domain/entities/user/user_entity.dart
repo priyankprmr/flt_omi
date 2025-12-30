@@ -16,7 +16,7 @@ class UserEntity with _$UserEntity {
   const UserEntity({
     required this.uid,
     required this.email,
-    required this.name,
+    this.name,
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>
