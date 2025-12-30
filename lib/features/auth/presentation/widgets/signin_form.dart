@@ -1,3 +1,4 @@
+import 'package:flt_omi/core/validators/auth_validator.dart';
 import 'package:flutter/material.dart';
 
 class SigninForm extends StatelessWidget {
@@ -5,28 +6,28 @@ class SigninForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        children: [
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Email',
-              prefixIcon: Icon(
-                Icons.alternate_email_outlined,
-              ),
+    return Column(
+      children: [
+        TextFormField(
+          decoration: const InputDecoration(
+            hintText: 'Email',
+            prefixIcon: Icon(
+              Icons.alternate_email_outlined,
             ),
           ),
-          const SizedBox(height: 14.0),
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Password',
-              prefixIcon: Icon(
-                Icons.lock_outline_rounded,
-              ),
+          validator: AuthValidator.email,
+        ),
+        const SizedBox(height: 14.0),
+        TextFormField(
+          decoration: const InputDecoration(
+            hintText: 'Password',
+            prefixIcon: Icon(
+              Icons.lock_outline_rounded,
             ),
           ),
-        ],
-      ),
+          validator: AuthValidator.password,
+        ),
+      ],
     );
   }
 }

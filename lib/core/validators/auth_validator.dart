@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart' show immutable;
 
 @immutable
-class AuthValidators {
-  const AuthValidators._();
+class AuthValidator {
+  const AuthValidator._();
 
   static String? email(String? value) {
     if (value == null || value.trim().isEmpty) {
@@ -25,6 +25,16 @@ class AuthValidators {
 
     if (value.length < 6) {
       return 'Password must be at least 6 characters';
+    }
+
+    return null;
+  }
+
+  static String? confirmPassword(String? pass, String? confirmPass) {
+    final value = password(confirmPass);
+    if (value != null) return value;
+    if (pass != confirmPass) {
+      return 'Passwords do not match!!!';
     }
 
     return null;
