@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../domain/auth_form_type.dart';
+import '../../domain/entities/auth_form_type.dart';
 
 part 'auth_form_provider.g.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flt_omi/core/constants/app_texts.dart';
 import 'package:flt_omi/core/theme/app_pallet.dart';
 import 'package:flt_omi/core/utils/padding.dart';
-import 'package:flt_omi/features/auth/domain/auth_form_type.dart';
+import 'package:flt_omi/features/auth/domain/entities/auth_form_type.dart';
 import 'package:flt_omi/features/auth/presentation/providers/auth_form_provider.dart';
 import 'package:flt_omi/features/auth/presentation/widgets/divider_with_text.dart';
 import 'package:flt_omi/features/auth/presentation/widgets/signin_form.dart';
