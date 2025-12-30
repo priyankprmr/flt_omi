@@ -1,4 +1,5 @@
 import 'package:flt_omi/core/constants/app_texts.dart';
+import 'package:flt_omi/core/theme/app_pallet.dart';
 import 'package:flt_omi/core/utils/padding.dart';
 import 'package:flt_omi/features/auth/domain/auth_form_type.dart';
 import 'package:flt_omi/features/auth/presentation/providers/auth_form_provider.dart';
@@ -21,6 +22,7 @@ class AuthScreen extends ConsumerWidget {
     final formType = ref.watch(authFormProvider);
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: switch (formType) {
           AuthFormType.signin => const Text(AppTexts.signIn),
@@ -29,88 +31,86 @@ class AuthScreen extends ConsumerWidget {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: constraints,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20.0),
-                    // Lottie animation
-                    Lottie.asset(
-                      'assets/lottie/welcome_text_animation.json',
-                    ),
-                    const SizedBox(height: 20.0),
-
-                    // Condition based auth forms
-                    Form(
-                      key: _formKey,
-                      child: switch (formType) {
-                        AuthFormType.signin => const SigninForm(),
-                        AuthFormType.signup => const SignupForm(),
-                      },
-                    ),
-
-                    // White spacing
-                    const Spacer(),
-
-                    // Condition based login and signup buttons
-                    switch (formType) {
-                      AuthFormType.signin => ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {}
-                          },
-                          child: const Text(AppTexts.signIn),
-                        ),
-                      AuthFormType.signup => ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {}
-                          },
-                          child: const Text(AppTexts.signUp),
-                        ),
-                    },
-
-                    // Divider
-                    const DividerWithText().padding(
-                      const EdgeInsets.symmetric(vertical: 20.0),
-                    ),
-
-                    // Google button
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FaIcon(FontAwesomeIcons.google),
-                          SizedBox(width: 4.0),
-                          Text(AppTexts.google)
-                        ],
-                      ),
-                    ),
-
-                    // Rich text to toggle forms
-                    Text.rich(
-                      switch (formType) {
-                        AuthFormType.signin => _formToggleText(
-                            context: context,
-                            prefixText: AppTexts.dontHaveAccount,
-                            suffixText: AppTexts.signUp,
-                            onTap: ref.read(authFormProvider.notifier).toggle,
-                          ),
-                        AuthFormType.signup => _formToggleText(
-                            context: context,
-                            prefixText: AppTexts.alreadyHaveAccount,
-                            suffixText: AppTexts.signIn,
-                            onTap: ref.read(authFormProvider.notifier).toggle,
-                          ),
-                      },
-                    ).padding(const EdgeInsets.symmetric(vertical: 20.0))
-                  ],
-                ).padding(const EdgeInsets.symmetric(horizontal: 16.0)),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 20.0),
+              // Lottie animation
+              Lottie.asset(
+                'assets/lottie/welcome_text_animation.json',
               ),
-            );
-          },
+              const SizedBox(height: 20.0),
+
+              // Condition based auth forms
+              Form(
+                key: _formKey,
+                child: switch (formType) {
+                  AuthFormType.signin => const SigninForm(),
+                  AuthFormType.signup => const SignupForm(),
+                },
+              ),
+
+              const SizedBox(
+                height: 32,
+              ),
+
+              // Condition based login and signup buttons
+              switch (formType) {
+                AuthFormType.signin => ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {}
+                    },
+                    child: const Text(AppTexts.signIn),
+                  ),
+                AuthFormType.signup => ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {}
+                    },
+                    child: const Text(AppTexts.signUp),
+                  ),
+              },
+
+              // Divider
+              const DividerWithText().padding(
+                const EdgeInsets.symmetric(vertical: 20.0),
+              ),
+
+              // Google button
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppPallet.white,
+                  foregroundColor: AppPallet.black,
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FaIcon(FontAwesomeIcons.google),
+                    SizedBox(width: 4.0),
+                    Text(AppTexts.google)
+                  ],
+                ),
+              ),
+
+              // Rich text to toggle forms
+              Text.rich(
+                switch (formType) {
+                  AuthFormType.signin => _formToggleText(
+                      context: context,
+                      prefixText: AppTexts.dontHaveAccount,
+                      suffixText: AppTexts.signUp,
+                      onTap: ref.read(authFormProvider.notifier).toggle,
+                    ),
+                  AuthFormType.signup => _formToggleText(
+                      context: context,
+                      prefixText: AppTexts.alreadyHaveAccount,
+                      suffixText: AppTexts.signIn,
+                      onTap: ref.read(authFormProvider.notifier).toggle,
+                    ),
+                },
+              ).padding(const EdgeInsets.symmetric(vertical: 20.0))
+            ],
+          ).padding(const EdgeInsets.symmetric(horizontal: 16.0)),
         ),
       ),
     );
