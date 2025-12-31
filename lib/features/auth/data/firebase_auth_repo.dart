@@ -54,7 +54,8 @@ class FirebaseAuthRepo implements AuthRepo {
   Future<UserEntity?> getCurrentUser() async {
     final user = firebaseAuth.currentUser;
 
-    if (user == null) throw Exception('No User Logged in...');
+    if (user == null) return null;
+
     return UserEntity(
       uid: user.uid,
       email: user.email!,
