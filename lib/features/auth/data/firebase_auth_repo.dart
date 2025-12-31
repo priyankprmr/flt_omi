@@ -58,7 +58,7 @@ class FirebaseAuthRepo implements AuthRepo {
 
     return UserEntity(
       uid: user.uid,
-      email: user.email!,
+      email: user.email ?? '',
     );
   }
 
@@ -68,13 +68,8 @@ class FirebaseAuthRepo implements AuthRepo {
   }
 
   @override
-  Future<String> sendPasswordResetEmail(String email) async {
-    try {
-      await firebaseAuth.sendPasswordResetEmail(email: email);
-      return 'Password reset email sent! Check your inbox.';
-    } catch (e) {
-      return 'Password reset failed: $e';
-    }
+  Future<void> sendPasswordResetEmail(String email) async {
+    await firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
   @override

@@ -11,4 +11,6 @@ class AppTexts {
 
   static const String dontHaveAccount = 'Don\'t have an account? ';
   static const String alreadyHaveAccount = 'Already have an account? ';
+
+  static const String loading = 'Loading...';
 }

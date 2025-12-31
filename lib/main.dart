@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flt_omi/core/theme/app_theme.dart';
+import 'package:flt_omi/core/utils/loading/loading_overlay.dart';
 import 'package:flt_omi/features/auth/presentation/providers/auth_is_loading_provider.dart';
+import 'package:flt_omi/features/auth/presentation/providers/auth_state_provider.dart';
 import 'package:flt_omi/features/auth/presentation/providers/is_logged_in_provider.dart';
 import 'package:flt_omi/features/auth/presentation/screen/auth_screen.dart';
 import 'package:flt_omi/firebase_options.dart';
@@ -17,7 +19,7 @@ Future<void> main() async {
   );
 
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MyApp(),
     ),
   );
@@ -25,26 +27,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  late OverlayEntry? _overlayEntry;
-
-  void _showOverlay(BuildContext context) {
-    if (_overlayEntry != null) return;
-
-    _overlayEntry = OverlayEntry(
-      builder: (_) => const Material(
-        color: Colors.black54,
-        child: Center(child: CircularProgressIndicator()),
-      ),
-    );
-
-    Overlay.of(context).insert(_overlayEntry!);
-  }
-
-  void _hideOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-  }
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,22 +38,27 @@ class MyApp extends StatelessWidget {
       // darkTheme: ThemeData.dark(),
       home: Consumer(
         builder: (context, ref, child) {
-          ref.listen(
-            authIsLoadingProvider,
-            (_, isLoading) {
-              if (isLoading) {
-                _showOverlay(context);
-              } else {
-                _hideOverlay();
-              }
-            },
-          );
+          ref.listen(authIsLoadingProvider, (_, isLoading) {
+            if (isLoading) {
+              LoadingOverlay.instance().show(context: context);
+            } else {
+              LoadingOverlay.instance().hide();
+            }
+          });
 
           final isLoggedIn = ref.watch(isLoggedInProvider);
           if (isLoggedIn) {
-            return const Scaffold(
-              body: Center(
-                child: Text('HOME'),
+            return Scaffold(
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('HOME'),
+                  ElevatedButton(
+                    onPressed: () =>
+                        ref.read(authStateProvider.notifier).logout(),
+                    child: const Text('Logout'),
+                  )
+                ],
               ),
             );
           } else {

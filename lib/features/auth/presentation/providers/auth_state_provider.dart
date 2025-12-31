@@ -23,7 +23,6 @@ class AuthStateProvider extends Notifier<AuthState> {
 
   void checkAuth() async {
     state = const AuthState.loading();
-    Future.delayed(const Duration(seconds: 10));
 
     _currentUser = await _authRepo.getCurrentUser();
     if (_currentUser == null) {
@@ -31,5 +30,47 @@ class AuthStateProvider extends Notifier<AuthState> {
     } else {
       state = AuthState.authenticated(user: _currentUser!);
     }
+  }
+
+  void login({required String email, required String password}) async {
+    try {
+      state = const AuthState.loading();
+
+      _currentUser = await _authRepo.loginWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (_currentUser != null) {
+        state = AuthState.authenticated(user: _currentUser!);
+      } else {
+        state = const AuthState.unauthenticated();
+      }
+    } catch (e) {
+      state = AuthState.error(message: e.toString());
+    }
+  }
+
+  void signUp({required String email, required String password}) async {
+    try {
+      state = const AuthState.loading();
+
+      _currentUser = await _authRepo.registerWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (_currentUser != null) {
+        state = AuthState.authenticated(user: _currentUser!);
+      } else {
+        state = const AuthState.unauthenticated();
+      }
+    } catch (e) {
+      state = AuthState.error(message: e.toString());
+    }
+  }
+
+  void logout() async {
+    state = const AuthState.loading();
+    await _authRepo.logout();
+    state = const AuthState.unauthenticated();
   }
 }

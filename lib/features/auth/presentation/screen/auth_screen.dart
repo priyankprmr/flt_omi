@@ -14,8 +14,6 @@ import 'package:lottie/lottie.dart';
 class AuthScreen extends ConsumerWidget {
   const AuthScreen({super.key});
 
-  static final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Form type from auth form type provider
@@ -42,32 +40,9 @@ class AuthScreen extends ConsumerWidget {
               const SizedBox(height: 20.0),
 
               // Condition based auth forms
-              Form(
-                key: _formKey,
-                child: switch (formType) {
-                  AuthFormType.signin => const SigninForm(),
-                  AuthFormType.signup => const SignupForm(),
-                },
-              ),
-
-              const SizedBox(
-                height: 32,
-              ),
-
-              // Condition based login and signup buttons
               switch (formType) {
-                AuthFormType.signin => ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
-                    },
-                    child: const Text(AppTexts.signIn),
-                  ),
-                AuthFormType.signup => ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
-                    },
-                    child: const Text(AppTexts.signUp),
-                  ),
+                AuthFormType.signin => const SigninForm(),
+                AuthFormType.signup => const SignupForm(),
               },
 
               // Divider

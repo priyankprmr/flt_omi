@@ -11,6 +11,6 @@ abstract class AuthRepo {
   });
   Future<void> logout();
   Future<UserEntity?> getCurrentUser();
-  Future<String> sendPasswordResetEmail(String email);
+  Future<void> sendPasswordResetEmail(String email);
   Future<void> deleteAccount();
 }
